@@ -18,7 +18,8 @@ app.get("/comics", async (req, res) => {
     const response = await axios.get(
       `https://lereacteur-marvel-api.herokuapp.com/comics?apiKey=${API_KEY}`
     );
-    console.log(response.data);
+    res.json(response.data);
+    // console.log(response.data);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

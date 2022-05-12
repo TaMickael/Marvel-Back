@@ -12,7 +12,7 @@ app.use(cors());
 const API_KEY = process.env.API_KEY;
 
 app.get("/comics", async (req, res) => {
-  console.log("sur la route !");
+  // console.log("sur la route !");
 
   try {
     const response = await axios.get(
@@ -20,6 +20,41 @@ app.get("/comics", async (req, res) => {
     );
     res.json(response.data);
     // console.log(response.data);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+app.get("/comics/:characterId", async (req, res) => {
+  // console.log("sur la route !");
+
+  try {
+    const response = await axios.get(
+      `https://lereacteur-marvel-api.herokuapp.com/comics/:characterId?apiKey=${API_KEY}`
+    );
+    res.json(response.data);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+app.get("/characters", async (req, res) => {
+  try {
+    const response = await axios.get(
+      `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=${API_KEY}`
+    );
+    res.json(response.data);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+app.get("/character/:characterId", async (req, res) => {
+  try {
+    const response = await axios.get(
+      `https://lereacteur-marvel-api.herokuapp.com/character/:characterId?apiKey=${API_KEY}`
+    );
+    res.json(response.data);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
